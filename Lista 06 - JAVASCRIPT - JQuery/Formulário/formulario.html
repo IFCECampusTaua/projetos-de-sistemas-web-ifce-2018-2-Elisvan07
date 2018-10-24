@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Formulário JQuery</title>		
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+		<script type="text/javascript">
+
+		$(document).ready(function(){
+			
+			//Função para mostrar uma mensagem ao carregar a tela.
+			$(function () {            
+				$("#msg").show();
+			});
+
+			//Função para utilizar apenas números no campo telefone e cpf.
+			$(".somenteNumero").bind("keyup blur focus", function(e) {
+			    e.preventDefault();
+			    var expre = /[^\d]/g;
+			    $(this).val($(this).val().replace(expre,''));
+			});
+
+			$("#formCadastro").validate({
+				//requisitos dos campos
+				rules:{
+					nome: {
+						required: true,
+						maxlength: 255,
+						minlength: 4,
+					},
+					telefone: {
+						required: true,
+						maxlength: 9,
+						minlength: 8,
+					},
+					data: {
+						required: true,
+					},
+					cpf: {
+						required: true,
+						maxlength: 11,
+						minlength: 11,
+					},
+					instituicao: {
+						required: true,
+						maxlength: 255,
+						minlength: 3,
+					},
+					email: {
+						required: true,
+						email: true,
+						maxlength: 255,
+					},
+				},
+				
+				submitHandler: function(form){
+					//mensagem de sucesso
+					alert("Sucesso!!!");
+					//reseta formulario
+					document.getElementById("formCadastro").reset();					
+				}
+			}) 
+		})
+		</script>
+
+	</head>
+	<body>
+		<div>
+			<h1>Formulário</h1>
+			
+			<form name="formularioCadastro" id="formCadastro" method="post" >
+				<table>	
+					<tr>
+						<td>
+							Nome
+						</td>
+						<td>
+							<input type="text" name="nome" id="nome" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Telefone
+						<td>
+							<input type="text" name="telefone" id="telefone" class="somenteNumero" placeholder="Somente números" />
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							Data de nascimento
+						</td>
+						<td>	
+							<input type="date" name="data" id="data"  />
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							CPF
+						</td>
+						<td>	
+							<input type="text" name="cpf" id="cpf" class="somenteNumero" placeholder="Somente números" />
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							Instituição
+						</td>
+						<td>	
+							<input type="text" name="instituicao" id="instituicao"  />
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							E-mail
+						</td>
+						<td>	
+							<input type="email" name="email" id="email"  />
+						</td>
+					</tr>
+					<tr>
+						<td><br>	
+							<input type="submit" name="enviar" />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="msg" style="display: none">
+			<p>Preencha os campos!</p>
+		</div>
+	</body>
+</html>
